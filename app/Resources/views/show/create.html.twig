@@ -3,4 +3,6 @@
 {%  block pageHeading %}
     Create a show
 {% endblock %}
-{% form_begin %}
+{% block content %}
+    {{ form(showForm) }}
+{% endblock %}
