@@ -10,15 +10,20 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
-        '719971e375036615a0685b6fb054583d' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        'd4622cd80e86cb40d2fd6f68eeb35592' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'Zend\\EventManager\\' => 18,
+            'Zend\\Code\\' => 10,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -67,8 +72,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\DBAL\\Migrations\\' => 25,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
+            'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
@@ -83,6 +90,14 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zend\\EventManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-eventmanager/src',
+        ),
+        'Zend\\Code\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-code/src',
+        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -195,6 +210,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
         ),
+        'Doctrine\\DBAL\\Migrations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/migrations/lib/Doctrine/DBAL/Migrations',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
@@ -202,6 +221,10 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
+        'Doctrine\\Bundle\\MigrationsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/doctrine-migrations-bundle',
         ),
         'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 
         array (
@@ -234,6 +257,13 @@ class ComposerStaticInit4187874367ae80601cb5da67908e84c8
             'SensioLabs\\Security' => 
             array (
                 0 => __DIR__ . '/..' . '/sensiolabs/security-checker',
+            ),
+        ),
+        'P' => 
+        array (
+            'ProxyManager\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/ocramius/proxy-manager/src',
             ),
         ),
         'D' => 

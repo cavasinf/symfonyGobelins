@@ -9,9 +9,12 @@
 namespace AppBundle\Type;
 
 
+use AppBundle\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Tests\Controller;
 
@@ -21,12 +24,15 @@ class ShowType extends AbstractType
     {
         $builder
             ->add("name")
-            ->add("category")
-            ->add("abstract")
+            ->add("category", EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name'
+            ])
+            ->add("abstract", TextareaType::class)
             ->add("country",CountryType::class)
             ->add("author")
             ->add("releaseDate")
-            ->add("mainPicture",FileType::class)
+            ->add("mainPicture")
         ;
     }
 }

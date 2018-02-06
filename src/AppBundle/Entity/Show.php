@@ -2,79 +2,106 @@
 
 namespace AppBundle\Entity;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="show")
- */
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
+
+/**
+ * Show
+ *
+ * @ORM\Table(name="show")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ShowRepository")
+ */
 class Show
 {
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var Category
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="abstract", type="string", length=255)
      */
     private $abstract;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
      */
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255)
      */
     private $author;
 
     /**
-     * @ORM\Column(type="DateTime")
+     * @var Date
+     *
+     * @ORM\Column(name="releaseDate", type="date")
      */
     private $releaseDate;
 
-
     /**
-     * @ORM\Column(type="blob")
+     * @var string
+     *
+     * @ORM\Column(name="mainPicture", type="string", length=255)
      */
     private $mainPicture;
 
+
     /**
-     * Show constructor.
-     * @param $name
-     * @param $category
-     * @param $abstract
-     * @param $country
-     * @param $author
-     * @param $releaseDate
-     * @param $mainPicture
+     * Get id
+     *
+     * @return int
      */
-    public function __construct($name, $category, $abstract, $country, $author, $releaseDate, $mainPicture)
+    public function getId()
     {
-        $this->name = $name;
-        $this->category = $category;
-        $this->abstract = $abstract;
-        $this->country = $country;
-        $this->author = $author;
-        $this->releaseDate = $releaseDate;
-        $this->mainPicture = $mainPicture;
+        return $this->id;
     }
 
     /**
-     * @return mixed
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Show
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
      */
     public function getName()
     {
@@ -82,15 +109,23 @@ class Show
     }
 
     /**
-     * @param mixed $name
+     * Set category
+     *
+     * @param Category $category
+     *
+     * @return Show
      */
-    public function setName($name)
+    public function setCategory(Category $category)
     {
-        $this->name = $name;
+        $this->category = $category;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get category
+     *
+     * @return Category
      */
     public function getCategory()
     {
@@ -98,15 +133,23 @@ class Show
     }
 
     /**
-     * @param mixed $category
+     * Set abstract
+     *
+     * @param string $abstract
+     *
+     * @return Show
      */
-    public function setCategory($category)
+    public function setAbstract($abstract)
     {
-        $this->category = $category;
+        $this->abstract = $abstract;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get abstract
+     *
+     * @return string
      */
     public function getAbstract()
     {
@@ -114,15 +157,23 @@ class Show
     }
 
     /**
-     * @param mixed $abstract
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Show
      */
-    public function setAbstract($abstract)
+    public function setCountry($country)
     {
-        $this->abstract = $abstract;
+        $this->country = $country;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get country
+     *
+     * @return string
      */
     public function getCountry()
     {
@@ -130,15 +181,23 @@ class Show
     }
 
     /**
-     * @param mixed $country
+     * Set author
+     *
+     * @param string $author
+     *
+     * @return Show
      */
-    public function setCountry($country)
+    public function setAuthor($author)
     {
-        $this->country = $country;
+        $this->author = $author;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get author
+     *
+     * @return string
      */
     public function getAuthor()
     {
@@ -146,15 +205,23 @@ class Show
     }
 
     /**
-     * @param mixed $author
+     * Set releaseDate
+     *
+     * @param \DateTime $releaseDate
+     *
+     * @return Show
      */
-    public function setAuthor($author)
+    public function setReleaseDate($releaseDate)
     {
-        $this->author = $author;
+        $this->releaseDate = $releaseDate;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get releaseDate
+     *
+     * @return \DateTime
      */
     public function getReleaseDate()
     {
@@ -162,30 +229,27 @@ class Show
     }
 
     /**
-     * @param mixed $releaseDate
+     * Set mainPicture
+     *
+     * @param string $mainPicture
+     *
+     * @return Show
      */
-    public function setReleaseDate($releaseDate)
+    public function setMainPicture($mainPicture)
     {
-        $this->releaseDate = $releaseDate;
+        $this->mainPicture = $mainPicture;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get mainPicture
+     *
+     * @return string
      */
     public function getMainPicture()
     {
         return $this->mainPicture;
     }
-
-    /**
-     * @param mixed $mainPicture
-     */
-    public function setMainPicture($mainPicture)
-    {
-        $this->mainPicture = $mainPicture;
-    }
-
-
-
-
 }
+

@@ -4,5 +4,8 @@
     Create a show
 {% endblock %}
 {% block content %}
-    {{ form(showForm) }}
+    {{ form_start(showForm) }}
+        {{ form_widget(showForm) }}
+        <input type="submit" class="btn btn-primary" value="Create">
+    {{ form_end(showForm) }}
 {% endblock %}

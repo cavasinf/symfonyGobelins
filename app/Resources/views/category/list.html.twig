@@ -1,0 +1,22 @@
+{%  extends 'show/base.html.twig' %}
+
+{%  block pageHeading %}
+    List of categories
+{% endblock %}
+
+{% block content %}
+
+    {% for label,messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {%  for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+<ul>
+    {% for category in categories %}
+    <li  style="color:{{ category.color }}">{{ category.name}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

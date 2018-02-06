@@ -1,0 +1,12 @@
+{%  extends 'show/base.html.twig' %}
+
+{%  block pageHeading %}
+    Create a category
+{% endblock %}
+
+{% block content %}
+    {{ form_start(categoryForm) }}
+        {{ form_widget(categoryForm) }}
+        <input type="submit" value="Create" class="btn btn-primary">
+    {{ form_end(categoryForm) }}
+{% endblock %}
