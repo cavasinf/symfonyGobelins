@@ -2,14 +2,14 @@
 
 namespace AppBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Show
  *
- * @ORM\Table(name="show")
+ * @ORM\Table(name="s_show")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ShowRepository")
  */
 class Show
@@ -68,10 +68,15 @@ class Show
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="mainPicture", type="string", length=255)
+     * @ORM\Column
+     * @Assert\Image(minWidth="750", minHeight="300", groups={"create"})
      */
+
     private $mainPicture;
+    /**
+     * @var File
+     */
+    private $tmpPictureFile;
 
 
     /**
@@ -221,26 +226,13 @@ class Show
     /**
      * Get releaseDate
      *
-     * @return \DateTime
+     * @return Date
      */
     public function getReleaseDate()
     {
         return $this->releaseDate;
     }
 
-    /**
-     * Set mainPicture
-     *
-     * @param string $mainPicture
-     *
-     * @return Show
-     */
-    public function setMainPicture($mainPicture)
-    {
-        $this->mainPicture = $mainPicture;
-
-        return $this;
-    }
 
     /**
      * Get mainPicture
@@ -250,6 +242,32 @@ class Show
     public function getMainPicture()
     {
         return $this->mainPicture;
+    }
+
+    /**
+     * @param $mainPicture
+     * @return Show
+     */
+    public function setMainPicture($mainPicture): Show
+    {
+        $this->mainPicture = $mainPicture;
+        return $this;
+    }
+    /**
+     * @return File
+     */
+    public function getTmpPictureFile(): ?File
+    {
+        return $this->tmpPictureFile;
+    }
+    /**
+     * @param File $tmpPictureFile
+     * @return Show
+     */
+    public function setTmpPictureFile(File $tmpPictureFile): Show
+    {
+        $this->tmpPictureFile = $tmpPictureFile;
+        return $this;
     }
 }
 

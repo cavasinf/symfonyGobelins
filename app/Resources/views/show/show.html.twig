@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block pageHeading %}
+    Show details
+{% endblock %}
+
+{% block content %}
+
+    <div class="card mb-4">
+        <img class="card-img-top" src="{{ asset('upload/'~show.mainPicture) }}" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">{{ show.name }}</h2>
+            <p class="card-text">{{ show.abstract }}</p>
+        </div>
+        <div class="card-footer text-muted">
+            Created on {{ show.releaseDate | date('Y-m-d') }} by {{ show.author }}
+        </div>
+    </div>
+
+{% endblock %}

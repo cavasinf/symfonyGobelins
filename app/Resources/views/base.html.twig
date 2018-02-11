@@ -23,7 +23,7 @@
 
 {%  embed "_includes/menu.html.twig" %}
     {% block menu_title %}
-        {{ parent() }} by DreamTeam
+        {{ parent() }} -  by DreamTeam
     {% endblock %}
 {%  endembed %}
 
@@ -49,7 +49,7 @@
         <div class="col-md-4">
 
             <!-- Search Widget -->
-            <div class="card my-4">
+            {#<div class="card my-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
@@ -59,18 +59,10 @@
                 </span>
                     </div>
                 </div>
-            </div>
+            </div>#}
 
 
             {{ render(controller("AppBundle:Show:categories")) }}
-
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Side Widget</h5>
-                <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                </div>
-            </div>
 
         </div>
 
