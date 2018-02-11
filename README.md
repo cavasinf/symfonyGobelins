@@ -10,7 +10,7 @@ Licence Pro DIM - Projet Symfony - ShowRoom
 
 ```bash
 git clone https://github.com/cavasinf/symfonyGobelins.git
-cd SymfonyShowroom
+cd symfonyGobelins
 composer install
 ```
 > Configurer en fonction de vos besoins
