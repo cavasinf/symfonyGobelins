@@ -248,7 +248,7 @@ class Show
      * @param $mainPicture
      * @return Show
      */
-    public function setMainPicture($mainPicture): Show
+    public function setMainPicture($mainPicture)
     {
         $this->mainPicture = $mainPicture;
         return $this;
@@ -256,7 +256,7 @@ class Show
     /**
      * @return File
      */
-    public function getTmpPictureFile(): ?File
+    public function getTmpPictureFile()
     {
         return $this->tmpPictureFile;
     }
@@ -264,7 +264,7 @@ class Show
      * @param File $tmpPictureFile
      * @return Show
      */
-    public function setTmpPictureFile(File $tmpPictureFile): Show
+    public function setTmpPictureFile(File $tmpPictureFile)
     {
         $this->tmpPictureFile = $tmpPictureFile;
         return $this;

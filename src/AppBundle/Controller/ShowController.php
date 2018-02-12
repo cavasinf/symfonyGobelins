@@ -14,7 +14,9 @@ use AppBundle\Type\ShowType;
 use AppBundle\Entity\Show;
 use AppBundle\Entity\Category;
 use AppBundle\File\FileUploader;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 
 /**
@@ -23,7 +25,6 @@ use AppBundle\File\FileUploader;
  *     name="show"
  *      )
  */
-
 class ShowController extends Controller
 {
     /**
@@ -33,9 +34,20 @@ class ShowController extends Controller
      *   )
      */
 
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $shows = $this->getDoctrine()->getRepository(Show::class)->findAll();
+        $showRepository = $this->getDoctrine()->getRepository(Show::class);
+        $session = $request->getSession();
+
+        if ($session->has('query_search_shows')) {
+            $querySearchShows = $session->get('query_search_shows');
+            $shows = $showRepository->findAllByQuery($querySearchShows);
+            $request->getSession()->remove('query_search_shows');
+        } else {
+            $shows = $showRepository->findAll();
+        }
+
+
         return $this->render('show/list.html.twig', [
             'shows' => $shows
         ]);
@@ -61,7 +73,7 @@ class ShowController extends Controller
     public function categoriesAction()
     {
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
-        return $this->render('_includes/category.html.twig',[
+        return $this->render('_includes/category.html.twig', [
             "categories" => $categories
         ]);
     }
@@ -80,11 +92,11 @@ class ShowController extends Controller
     {
         $show = new Show();
 
-        $form  = $this->createForm(ShowType::class, $show);
+        $form = $this->createForm(ShowType::class, $show);
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
 
             $generatedFileName = $fileUploader->upload(
                 $show->getTmpPictureFile(),
@@ -111,7 +123,7 @@ class ShowController extends Controller
 
 
     /**
-     * @Route("/update/{id}", name="update", requirements={"id"="\d+"})
+     * @Route("/update/{id}", name="_update", requirements={"id"="\d+"})
      * @Method({"GET", "PUT"})
      * @param Request $request
      * @param Show $show
@@ -150,5 +162,53 @@ class ShowController extends Controller
             'show/create.html.twig',
             ['showForm' => $showForm->createView()]
         );
+    }
+
+    /**
+     * @Route("/delete/{id}",name="_delete")
+     * @param Request $request
+     * @param $showId
+     * @param CsrfTokenManager $crsfTokenManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(Request $request ,$showId, CsrfTokenManager $crsfTokenManager)
+    {
+
+        $doctrine = $this->getDoctrine();
+        $show = $doctrine->getRepository('AppBundle:Show')->find($showId);
+
+        if (!$show) {
+            throw new NotFoundHttpException(sprintf('There is no show with the id %d', $show->getId()));
+        }
+
+        $crsfToken = new CsrfToken('delete_show', $request->request->get('_csrf_token'));
+
+        if ($crsfTokenManager->isTokenValid($crsfToken)) {
+
+            $doctrine->getManager()->remove($show);
+            $doctrine->getManager()->flush();
+
+            $this->addFlash('success', 'The show has been successfully removed !');
+        }
+        else
+        {
+            $this->addFlash('danger', 'The crsf token is not valid. Not able to delete this show.');
+        }
+
+        return $this->redirectToRoute("show_list");
+
+    }
+
+
+    /**
+     * @Route("/search", name="_search")
+     * @Method({"POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function searchAction(Request $request)
+    {
+        $request->getSession()->set('query_search_shows', $request->request->get('query'));
+        return $this->redirectToRoute('show_list');
     }
 }
