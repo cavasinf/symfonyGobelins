@@ -8,20 +8,30 @@ Licence Pro DIM - Projet Symfony - ShowRoom
 
 ## Installation
 
+> TODO : Se positionner en fonction du lieu où l'on souhaite avoir son projet
+
+> Commande bash : cd Path\to\my\project
 ```bash
 git clone https://github.com/cavasinf/symfonyGobelins.git
 cd symfonyGobelins
 composer install
 ```
-> Configurer en fonction de vos besoins
-```
-php bin/console d:s:u
+> TODO : Configurer en fonction de vos besoins (ip, port, ...)
+```bash
+php bin/console d:d:c
+php bin/console d:m:migrate
 php bin/console s:r
 ```
 
 ## Temps de travail
-* Lundi 05/02 (2h)
-* Mardi 06/02 (7h)
-* Dimanche 11/02 (4H)
+
+Jour|Date|Temps
+--- | --- | ---
+Lundi | 05/02 | (2h)
+Mardi | 06/02 | (7h)
+Dimanche | 11/02 | (4H)
+Lundi | 12/02 | (7H)
+--- |**Total**| **20H**
+
 
 >Intervenante : Sarah KHALIL
