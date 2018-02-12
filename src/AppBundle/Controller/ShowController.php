@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\ShowFinder\ShowFinder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -14,6 +16,7 @@ use AppBundle\Type\ShowType;
 use AppBundle\Entity\Show;
 use AppBundle\Entity\Category;
 use AppBundle\File\FileUploader;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
@@ -32,20 +35,31 @@ class ShowController extends Controller
      *     "/list",
      *     name="_list"
      *   )
+     * @param Request $request
+     * @param ShowFinder $showFinder
+     * @return Response
      */
 
-    public function listAction(Request $request)
+    public function listAction(Request $request,ShowFinder $showFinder)
     {
-        $showRepository = $this->getDoctrine()->getRepository(Show::class);
         $session = $request->getSession();
+        $showRepository = $this->getDoctrine()->getRepository(Show::class);
 
+        if($session->has('query_search_shows'))
+        {
+            $shows = $showFinder->findByName($session->get('query_search_shows'));
+            $request->getSession()->remove('query_search_shows');
+        } else {
+            $shows = $showRepository->findAll();
+        }
+        /*
         if ($session->has('query_search_shows')) {
             $querySearchShows = $session->get('query_search_shows');
             $shows = $showRepository->findAllByQuery($querySearchShows);
             $request->getSession()->remove('query_search_shows');
         } else {
             $shows = $showRepository->findAll();
-        }
+        }*/
 
 
         return $this->render('show/list.html.twig', [
@@ -85,7 +99,7 @@ class ShowController extends Controller
      *   )
      * @param Request $request
      * @param FileUploader $fileUploader
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
 
     public function createAction(Request $request, FileUploader $fileUploader)
@@ -128,7 +142,7 @@ class ShowController extends Controller
      * @param Request $request
      * @param Show $show
      * @param FileUploader $fileUploader
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function updateAction(Request $request, Show $show, FileUploader $fileUploader)
     {
@@ -169,7 +183,7 @@ class ShowController extends Controller
      * @param Request $request
      * @param $showId
      * @param CsrfTokenManager $crsfTokenManager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request ,$showId, CsrfTokenManager $crsfTokenManager)
     {
@@ -204,7 +218,7 @@ class ShowController extends Controller
      * @Route("/search", name="_search")
      * @Method({"POST"})
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function searchAction(Request $request)
     {

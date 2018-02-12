@@ -31,6 +31,14 @@ services:
 
     # add more services, or override services that need manual wiring
     AppBundle\File\FileUploader:
-            arguments:
-                $pathToProject: '%kernel.project_dir%'
-                $uploadDir: '%upload_dir%'
+        arguments:
+            $pathToProject: '%kernel.project_dir%'
+            $uploadDir: '%upload_dir%'
+
+    AppBundle\ShowFinder\DBShowFinder:
+        tags: ['show.finder']
+
+    AppBundle\ShowFinder\OMDBFinder:
+        arguments:
+          - '@csa_guzzle.client.OMDB_api'
+        tags: ['show.finder']
