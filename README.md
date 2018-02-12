@@ -4,7 +4,7 @@ Licence Pro DIM - Projet Symfony - ShowRoom
 ## Requierement
 
 * Composer 
-* Php 7.1 ou plus
+* Php 5.2 ou plus
 
 ## Installation
 
@@ -19,7 +19,6 @@ composer install
 > TODO : Configurer en fonction de vos besoins (ip, port, ...)
 ```bash
 php bin/console d:d:c
-php bin/console d:m:migrate
 php bin/console s:r
 ```
 
@@ -30,7 +29,7 @@ Jour|Date|Temps
 Lundi | 05/02 | (2h)
 Mardi | 06/02 | (7h)
 Dimanche | 11/02 | (4H)
-Lundi | 12/02 | (7H)
+Lundi | 12/02 | (6,5H)
 --- |**Total**| **20H**
 
 
