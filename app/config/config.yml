@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     upload_dir: /upload
+    omdb_api_key : 3ef04561
 
 framework:
     #esi: ~
