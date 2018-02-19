@@ -39,7 +39,7 @@ class LoginController extends Controller
      */
     public function logoutAction()
     {
-        dump('This code is never executed 🤩');
+        dump('This code is never executed 👌🏿');
     }
 
 }

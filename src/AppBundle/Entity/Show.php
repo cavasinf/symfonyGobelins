@@ -59,8 +59,8 @@ class Show
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ManyToOne(targetEntity="User")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $author;
 

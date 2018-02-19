@@ -64,6 +64,12 @@ class User implements UserInterface
      */
     private $lastconnection;
 
+    private $shows;
+
+    public function __construct()
+    {
+
+    }
 
     /**
      * Get id
@@ -195,7 +201,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_USER','ROLE_ADMIN');
     }
 
     /**
@@ -213,5 +219,20 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+
+    public function addShow(Show $show)
+    {
+        if($this->shows->contains($show)){
+        $this->shows->add($show);
+    }
+    }
+
+    public function removeShow(Show $show)
+    {
+        $this->shows->remove($show);
+    }
+
+
 }
 
