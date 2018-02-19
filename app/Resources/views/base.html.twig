@@ -8,7 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>{% block title %}
+            Showroom
+        {% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -22,7 +24,7 @@
 </head>
 
 <body>
-
+{% block bodyHTML %}
 
 {%  embed "_includes/menu.html.twig" %}
     {% block menu_title %}
@@ -71,7 +73,7 @@
     </div>
     <!-- /.container -->
 </footer>
-
+{% endblock %}
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

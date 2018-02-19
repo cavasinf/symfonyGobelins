@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Login{% endblock %}
+
+{% block bodyHTML %}
+
+    {% block error %}
+        {% if error is not null %}
+            {% if error.message == "Bad credentials." %}
+                <div class="alert alert-danger">
+                        Wrong password or email. Check inputs and retry.
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+
+    <form action="{{ path('login_check') }}" method="POST">
+        <label for="email">Email </label>
+        <input name="email" id="email" type="text" class="form-control" value="{{ lastUsername }}"/>
+
+        <label for="password">Password </label>
+        <input name="password" id="password" type="password" class="form-control"/>
+
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+
+{% endblock %}

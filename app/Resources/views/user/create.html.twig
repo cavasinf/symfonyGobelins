@@ -2,6 +2,13 @@
 
 {% block title %}AppBundle:User:create{% endblock %}
 
-{% block body %}
-<h1>Welcome to the User:create page</h1>
+{% block pageHeading %}
+    Create User
+{% endblock %}
+
+{% block content %}
+    {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+    <input type="submit" value="Create" class="btn btn-primary">
+    {{ form_end(userForm) }}
 {% endblock %}

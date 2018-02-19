@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * user
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
  */
-class user
+class User implements UserInterface
 {
     /**
      * @var int
@@ -24,9 +25,9 @@ class user
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255, unique=true)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @var string
@@ -75,28 +76,22 @@ class user
     }
 
     /**
-     * Set pseudo
-     *
-     * @param string $pseudo
-     *
-     * @return user
+     * @return string
      */
-    public function setPseudo($pseudo)
+    public function getUsername()
     {
-        $this->pseudo = $pseudo;
-
-        return $this;
+        return $this->email;
     }
 
     /**
-     * Get pseudo
-     *
-     * @return string
+     * @param string $username
      */
-    public function getPseudo()
+    public function setUsername($username)
     {
-        return $this->pseudo;
+        $this->email = $username;
+        $this->username = $username;
     }
+
 
     /**
      * Set firstname
@@ -194,22 +189,29 @@ class user
         return $this->lastconnection;
     }
 
+
     /**
-     * @return string
+     * @return (Role|string)[] The user roles
      */
-    public function getEmail()
+    public function getRoles()
     {
-        return $this->email;
+        return array('ROLE_USER');
     }
 
     /**
-     * @param string $email
+     * @return string|null The salt
      */
-    public function setEmail($email)
+    public function getSalt()
     {
-        $this->email = $email;
+        // TODO: Implement getSalt() method.
     }
 
-
+    /**
+     *
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
 }
 

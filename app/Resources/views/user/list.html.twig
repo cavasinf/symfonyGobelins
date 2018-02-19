@@ -1,0 +1,32 @@
+{%  extends "base.html.twig" %}
+
+{% block pageHeading %}
+    List of Users
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{  loop.index  }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center;font-style: italic">No users found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
