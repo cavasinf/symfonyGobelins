@@ -4,6 +4,7 @@ namespace AppBundle\ShowFinder;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Show;
+use DateTime;
 use GuzzleHttp\Client;
 
 /**
@@ -18,12 +19,13 @@ class OMDBFinder implements ShowFinderInterface
     private $apiKey;
 
 
-    public function __construct($apiKey)
+    public function __construct($client,$apiKey)
     {
         $this->apiKey = $apiKey;
-        $this->client = new Client([
+        $this->client = $client;
+        /*$this->client = new Client([
             'base_uri' => "http://www.omdbapi.com/",
-        ]);
+        ]);*/
     }
 
 
@@ -43,7 +45,10 @@ class OMDBFinder implements ShowFinderInterface
             ]
         ]);
 
-        $series = \GuzzleHttp\json_decode($res->getBody(), 1)['Search'];
+        $JSONResponse = \GuzzleHttp\json_decode($res->getBody(), 1);
+        if (isset($JSONResponse["Error"]))
+            return [];
+        $series = $JSONResponse['Search'];
         foreach ($series as &$serie) {
             $serie = $this->getShowInfo($serie['imdbID']);
             $serie = $this->castApiShow($serie);
@@ -72,17 +77,19 @@ class OMDBFinder implements ShowFinderInterface
         return \GuzzleHttp\json_decode($res->getBody(), 1);
     }
 
-    private function castApiShow($apiShow){
+    private function castApiShow($apiOMDBShow){
+
         $category = new Category();
-        $category->setName($apiShow["Genre"]);
+        $category->setName($apiOMDBShow["Genre"]);
 
         $show = new Show();
-        $show->setName($apiShow["Title"]);
-        $show->setAbstract($apiShow["Plot"]);
-        $show->setCountry($apiShow["Country"]);
-        $show->setReleaseDate($apiShow["Released"]);
-        $show->setAuthor($apiShow["Writer"]);
-        $show->setMainPicture($apiShow["Poster"]);
+        $show->setName($apiOMDBShow["Title"]);
+        $show->setDataSource(Show::CST_DATA_SOURCE_OMDB);
+        $show->setAbstract($apiOMDBShow["Plot"]);
+        $show->setCountry($apiOMDBShow["Country"]);
+        $show->setReleaseDate($apiOMDBShow["Released"]);
+        $show->setAuthor($apiOMDBShow["Writer"]);
+        $show->setMainPicture($apiOMDBShow["Poster"]);
         $show->setCategory($category);
 
         return $show;

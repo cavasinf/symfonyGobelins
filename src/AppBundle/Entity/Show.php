@@ -15,6 +15,10 @@ use Symfony\Component\Validator\Constraints\Date;
  */
 class Show
 {
+
+    const CST_DATA_SOURCE_OMDB = "OMDB";
+    const CST_DATA_SOURCE_DB = "In local Data Base";
+
     /**
      * @var int
      *
@@ -59,6 +63,13 @@ class Show
      * @ORM\Column(name="author", type="string", length=255)
      */
     private $author;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dataSource", type="string", length=255)
+     */
+    private $dataSource;
 
     /**
      * @var Date
@@ -209,6 +220,23 @@ class Show
     {
         return $this->author;
     }
+
+    /**
+     * @return string
+     */
+    public function getDataSource()
+    {
+        return $this->dataSource;
+    }
+
+    /**
+     * @param string $dataSource
+     */
+    public function setDataSource($dataSource)
+    {
+        $this->dataSource = $dataSource;
+    }
+
 
     /**
      * Set releaseDate

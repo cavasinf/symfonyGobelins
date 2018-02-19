@@ -39,5 +39,7 @@ services:
         tags: ['show.finder']
 
     AppBundle\ShowFinder\OMDBFinder:
-        arguments: ['%omdb_api_key%']
+        arguments:
+          $client : '@csa_guzzle.client.OMDB_api'
+          $apiKey : '%omdb_api_key%'
         tags: ['show.finder']

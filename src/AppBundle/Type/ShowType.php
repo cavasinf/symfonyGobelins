@@ -26,7 +26,7 @@ class ShowType extends AbstractType
             ->add("name")
             ->add("category", EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
             ->add("abstract", TextareaType::class)
             ->add("country",CountryType::class)

@@ -8,7 +8,6 @@ imports:
 parameters:
     locale: en
     upload_dir: /upload
-    omdb_api_key : 3ef04561
 
 framework:
     #esi: ~
@@ -78,4 +77,4 @@ csa_guzzle:
     clients:
         OMDB_api:
             config:
-                base_url: 'http://www.omdbapi.com'
+                base_uri: 'http://www.omdbapi.com/'

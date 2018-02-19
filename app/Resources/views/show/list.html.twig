@@ -9,28 +9,44 @@
         {% for show in shows %}
             <div class="card mb-4">
                 {% if show.id is not null %}
-                    <img class="card-img-top" src="{{ asset("upload/" ~ show.mainPicture) }}" alt="Show picture">
+                    {% if show.mainPicture is not null %}
+                        <img class="card-img-top" src="{{ asset("upload/" ~ show.mainPicture) }}" alt="Show picture">
+                    {% endif %}
                     <div class="card-body">
                         <h2 class="card-title">{{ show.name }}</h2>
-                        <p class="card-text">{{ show.abstract }}</p>
+                        <p class="card-text">
+                            {{ show.abstract }}
+                        </p>
                         <a href="{{ path("show_show", { 'id' : show.id}) }}" class="btn btn-primary">Read More &rarr;</a>
                     </div>
                 {% else %}
-                    <img class="card-img-top" src="{{ show.mainPicture }}" alt="Show picture">
+                    {% if show.mainPicture != "N/A" %}
+                        <img class="card-img-top" src="{{ show.mainPicture }}" alt="Show picture">
+                    {% endif %}
                     <div class="card-body">
                         <h2 class="card-title">{{ show.name }}</h2>
-                        <p class="card-text">{{ show.abstract }}</p>
+                        <p class="card-text">
+                            {% if show.abstract != "N/A" %}
+                                {{ show.abstract }}
+                            {% else %}
+                                There is no abstract for this show :(
+                            {% endif %}</p>
                     </div>
-                    {#<div class="card-footer text-muted">
-                        Created on {{ show.releaseDate | date('Y-m-d') }} by {{ show.author }}
-                    </div>#}
+                    <div class="card-footer text-muted">
+                        Created on {{ show.releaseDate }}
+                    {% if show.author != "N/A" %}
+                        by {{ show.author }}
+                    {% endif %}
+                    </div>
                 {% endif %}
             </div>
         {% else %}
             <div class="text-center">There is no show to display ...</div>
+            {#{% set showsToDisplay = false %}#}
         {% endfor %}
 
     <!-- Pagination -->
+    {#{% if showsToDisplay %}#}
     <ul class="pagination justify-content-center mb-4">
         <li class="page-item">
             <a class="page-link" href="#">&larr; Older</a>
@@ -39,4 +55,5 @@
             <a class="page-link" href="#">Newer &rarr;</a>
         </li>
     </ul>
+    {#{% endif %}#}
 {% endblock %}
