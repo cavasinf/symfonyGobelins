@@ -69,6 +69,28 @@ class User implements UserInterface
      */
     private $lastconnection;
 
+    /**
+     *
+     * @ORM\Column(name="roles", type="json_array", nullable=true)
+     */
+    private $roles;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function __construct()
     {
@@ -199,13 +221,20 @@ class User implements UserInterface
         return $this->lastconnection;
     }
 
-
     /**
-     * @return (Role|string)[] The user roles
+     * @return mixed
      */
     public function getRoles()
     {
-        return array('ROLE_USER', 'ROLE_ADMIN');
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
 

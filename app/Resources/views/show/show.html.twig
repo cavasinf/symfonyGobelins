@@ -11,11 +11,13 @@
         <div class="card-body">
             <h2 class="card-title">{{ show.name }}</h2>
             <p class="card-text">{{ show.abstract }}</p>
+            {%  if is_granted('Not USED',show) %}
             <form method="post">
                 <a href="{{ path("show_delete", {'id': show.id}) }}" class="btn btn-danger">
                     <i class="fas fa-trash-alt"></i> Delete</a>
                 <input type="hidden">
             </form>
+            {% endif %}
         </div>
         <div class="card-footer text-muted">
             Created on {{ show.releaseDate | date('Y-m-d') }} by {{ show.author.lastname }}

@@ -46,5 +46,5 @@ security:
             anonymous: ~
 
     access_control:
-      - path: ^/user$
+      - path: ^/user
         roles: ['ROLE_ADMIN']

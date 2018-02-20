@@ -5,11 +5,35 @@
  */
 
 body {
-  padding-top: 54px;
+    padding-top: 54px;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
+.login-box {
+    width: 30%;
+    margin: 25vh auto;
+    padding: 2vmin;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    border-radius: 0.3vmin;
+    box-shadow: 0 0 1vmin 0 rgba(128, 128, 128, 0.2);
 }
+
+.login-container-button {
+    position: relative;
+    height: 50px;
+}
+
+.login-button {
+    position: absolute;
+    right: .7vmin;
+    bottom: 0;
+}
+
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}
+
+
+
