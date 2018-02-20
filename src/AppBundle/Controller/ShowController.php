@@ -118,6 +118,10 @@ class ShowController extends Controller
             );
             $show->setMainPicture($generatedFileName);
 
+            $show->setAuthor($this->getUser());
+
+            $show->setDataSource(Show::CST_DATA_SOURCE_DB);
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($show);
@@ -162,6 +166,7 @@ class ShowController extends Controller
             );
 
             $show->setMainPicture($generatedFileName);
+            $show->setDataSource(Show::CST_DATA_SOURCE_DB);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($show);

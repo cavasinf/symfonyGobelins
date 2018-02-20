@@ -58,9 +58,8 @@ class Show
     private $country;
 
     /**
-     * @var string
-     * @ManyToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="shows")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $author;
 
@@ -198,28 +197,22 @@ class Show
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Show
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
+     * @return mixed
      */
     public function getAuthor()
     {
         return $this->author;
     }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+
 
     /**
      * @return string

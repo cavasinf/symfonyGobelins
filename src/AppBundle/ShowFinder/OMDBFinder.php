@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Show;
 use DateTime;
 use GuzzleHttp\Client;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 /**
  * @property Client client
@@ -17,12 +18,14 @@ class OMDBFinder implements ShowFinderInterface
 
     private $client;
     private $apiKey;
+    private $tokenStorage;
 
 
-    public function __construct($client,$apiKey)
+    public function __construct($client,$apiKey,TokenStorage $tokenStorage)
     {
         $this->apiKey = $apiKey;
         $this->client = $client;
+        $this->tokenStorage = $tokenStorage;
         /*$this->client = new Client([
             'base_uri' => "http://www.omdbapi.com/",
         ]);*/
@@ -88,7 +91,7 @@ class OMDBFinder implements ShowFinderInterface
         $show->setAbstract($apiOMDBShow["Plot"]);
         $show->setCountry($apiOMDBShow["Country"]);
         $show->setReleaseDate($apiOMDBShow["Released"]);
-        $show->setAuthor($apiOMDBShow["Writer"]);
+        $show->setAuthor($this->tokenStorage->getToken()->getUser());
         $show->setMainPicture($apiOMDBShow["Poster"]);
         $show->setCategory($category);
 

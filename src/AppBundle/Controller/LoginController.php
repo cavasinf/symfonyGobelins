@@ -19,7 +19,7 @@ class LoginController extends Controller
      */
     public function LoginAction(AuthenticationUtils $authUtils)
     {
-
+//        dump($authUtils->getLastAuthenticationError());die;
             return $this->render("login/login.html.twig",[
                 'error' => $authUtils->getLastAuthenticationError(),
                 'lastUsername' => $authUtils->getLastUsername()

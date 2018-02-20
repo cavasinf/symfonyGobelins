@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * user
+ * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
@@ -58,13 +58,17 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\OneToMany(targetEntity="Show", mappedBy="author")
+     */
+    private $shows;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="lastconnection", type="datetime", nullable=true)
      */
     private $lastconnection;
 
-    private $shows;
 
     public function __construct()
     {
@@ -201,8 +205,9 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER','ROLE_ADMIN');
+        return array('ROLE_USER', 'ROLE_ADMIN');
     }
+
 
     /**
      * @return string|null The salt
@@ -220,19 +225,34 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
+    /**
+     * @return mixed
+     */
+    public function getShows()
+    {
+        return $this->shows;
+    }
+
+    /**
+     * @param mixed $shows
+     */
+    public function setShows($shows)
+    {
+        $this->shows = $shows;
+    }
+
 
     public function addShow(Show $show)
     {
-        if($this->shows->contains($show)){
-        $this->shows->add($show);
-    }
+        if ($this->shows->contains($show)) {
+            $this->shows->add($show);
+        }
     }
 
     public function removeShow(Show $show)
     {
         $this->shows->remove($show);
     }
-
 
 }
 

@@ -1,4 +1,4 @@
-{%  extends "base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block pageHeading %}
     List of Users
@@ -9,19 +9,29 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>First Name</th>
+            {#<th>First Name</th>#}
             <th>Last Name</th>
             <th>Username</th>
+            <th>Roles</th>
+            <th>Shows</th>
         </tr>
         </thead>
         <tbody>
         {% for user in users %}
-        <tr>
-            <td>{{  loop.index  }}</td>
-            <td>{{ user.firstname }}</td>
-            <td>{{ user.lastname }}</td>
-            <td>{{ user.username }}</td>
-        </tr>
+            <tr>
+                <td>{{ loop.index }}</td>
+                {#<td>{{ user.firstname }}</td>#}
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    {% for show in user.shows %}
+                        {{ show.name }}{% if not loop.last %}, {% endif %}
+                    {% else %}
+                        No shows yet!
+                    {% endfor %}
+                </td>
+            </tr>
         {% else %}
             <tr>
                 <td colspan="4" style="text-align: center;font-style: italic">No users found</td>

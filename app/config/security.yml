@@ -14,7 +14,7 @@ security:
                         roles: 'ROLE_USER'
         user_db:
             entity:
-                class: AppBundle\Entity\user
+                class: AppBundle\Entity\User
                 property: email
 
     encoders:

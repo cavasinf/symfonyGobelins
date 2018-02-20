@@ -30,7 +30,6 @@ class ShowType extends AbstractType
             ])
             ->add("abstract", TextareaType::class)
             ->add("country",CountryType::class)
-            ->add("author")
             ->add("releaseDate")
             ->add('tmpPictureFile', FileType::class, ['label' => 'Main Picture']);
         ;
