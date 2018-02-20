@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Category
 {
@@ -18,6 +20,7 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
@@ -25,6 +28,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @JMS\Expose
      */
     private $name;
 
@@ -32,6 +36,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=255)
+     *  @JMS\Expose
      */
     private $color;
 

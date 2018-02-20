@@ -6,12 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Date;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Show
  *
  * @ORM\Table(name="s_show")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ShowRepository")
+ * @JMS\ExclusionPolicy("all")
  */
 class Show
 {
@@ -25,6 +27,7 @@ class Show
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Expose
      */
     private $id;
 
@@ -32,6 +35,7 @@ class Show
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @JMS\Expose
      */
     private $name;
 
@@ -40,6 +44,7 @@ class Show
      *
      * @ORM\ManyToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @JMS\Expose
      */
     private $category;
 
@@ -47,6 +52,7 @@ class Show
      * @var string
      *
      * @ORM\Column(name="abstract", type="string", length=255)
+     * @JMS\Expose
      */
     private $abstract;
 
@@ -54,12 +60,14 @@ class Show
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     * @JMS\Expose
      */
     private $country;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="shows")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @JMS\Expose
      */
     private $author;
 
@@ -67,6 +75,7 @@ class Show
      * @var string
      *
      * @ORM\Column(name="dataSource", type="string", length=255)
+     * @JMS\Expose
      */
     private $dataSource;
 
@@ -74,6 +83,7 @@ class Show
      * @var Date
      *
      * @ORM\Column(name="releaseDate", type="date")
+     * @JMS\Expose
      */
     private $releaseDate;
 
@@ -81,6 +91,7 @@ class Show
      * @var string
      * @ORM\Column
      * @Assert\Image(minWidth="750", minHeight="300", groups={"create"})
+     * @JMS\Expose
      */
 
     private $mainPicture;
