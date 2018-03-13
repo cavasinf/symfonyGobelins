@@ -18,4 +18,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    omdb_api_key: ~
+    omdb_api_key: 3ef04561

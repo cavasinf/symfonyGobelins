@@ -283,5 +283,23 @@ class User implements UserInterface
         $this->shows->remove($show);
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+
+
 }
 
