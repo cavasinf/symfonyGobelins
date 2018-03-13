@@ -4,7 +4,7 @@ Licence Pro DIM - Projet Symfony - ShowRoom
 ## Requierement
 
 * Composer 
-* Php 5.2 ou plus
+* Php 7 ou plus
 
 ## Installation
 
@@ -15,6 +15,7 @@ Licence Pro DIM - Projet Symfony - ShowRoom
 git clone https://github.com/cavasinf/symfonyGobelins.git
 cd symfonyGobelins
 composer install
+php bin/console assets:install
 ```
 > TODO : Configurer en fonction de vos besoins (ip, port, ...)
 ```bash
@@ -30,7 +31,8 @@ Lundi | 05/02 | (2h)
 Mardi | 06/02 | (7h)
 Dimanche | 11/02 | (4H)
 Lundi | 12/02 | (6,5H)
---- |**Total**| **20H**
+Mardi | 13/03 | (4H)
+--- |**Total**| **24H**
 
 
 >Intervenante : Sarah KHALIL
