@@ -23,6 +23,20 @@ php bin/console d:d:c
 php bin/console s:r
 ```
 
+## Création du premier l'utilisateur admin
+
+> Afin de pouvoir acceder au service un compte admin principale est nécessaire, pour cela il vous faut le créer dans votre BDD dans la table 'user'.
+> Il vous faut generer un mot de passe hashé grace à l'API avec l'adresse suivante :
+```
+http://127.0.0.1:8000/api/user/createPassword/VotreMotDePasseIci
+
+Valeur de retour : "$2y$13$S0g0CY6IEFHdGjkBPt2ZH.Ki0iqBHcxUSSO6.bi2liZaoaWIsc1hm"
+```
+> Ensuite définir un role ADMIN pour cet utilisateur, en écrivant ceci dans la colonne 'roles' de la table **user**
+```
+["ROLE_ADMIN"]
+```
+
 ## Temps de travail
 
 Jour|Date|Temps
